@@ -1,0 +1,19 @@
+/*可以在这里添加你自己的css*/
+img {  
+ max-width: 500xp; /*图片自适应宽度*/  
+ max-height: 300xp; /*图片自适应高度度*/  
+}  
+body {  
+ overflow-y: scroll !important;  
+}  
+.view {  
+ word-break: break-all;  
+}  
+.vote_area {  
+ display: block;  
+}  
+.vote_iframe {  
+ background-color: transparent;  
+ border: 0 none;  
+ height: 100%;  
+}  

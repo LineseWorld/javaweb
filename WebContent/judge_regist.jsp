@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>注册判断</title>
 </head>
 <body>
 	<%
@@ -13,6 +13,8 @@
 		String pwd = request.getParameter("user_pwd");
 		String pwd2 = request.getParameter("user_pwd2");
 		String name = request.getParameter("user_name");
+		name=new String(name.getBytes("iso-8859-1"),"utf-8");
+		System.out.println(name);
 		RegistDao dao = new RegistDao();
 		int result = dao.judge(id);
 		if(result==0) {

@@ -3,7 +3,9 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+
+import Info.QuestionInfo;
+
 
 public class RegistDao {
     
@@ -17,6 +19,7 @@ public class RegistDao {
         try{
         	pstmt = (PreparedStatement) con.prepareStatement(sql);
             ResultSet res=pstmt.executeQuery();//结果集对象 res
+            
             if(res.next()) {//判断是否存在
             	return 0;
             }
@@ -40,11 +43,11 @@ public class RegistDao {
             pstmt.setString(2, pwd);
             pstmt.setString(3, name);
             i=pstmt.executeUpdate();
-            pstmt.close();
-            con.close();
+            
             System.out.println("插入成功");
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+    
 }

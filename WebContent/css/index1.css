@@ -1,9 +1,21 @@
 @charset "UTF-8";
-.tag1{
-	width: 100px;
-    margin: 100px;
-    color: #ef0909;
-    height: px;
-    background: #7ad2ec;
-    align-content: center;
+.global{
+	width: 75%;
+	margin:0 auto;
+	background-color: #C5E9F3; 
+}
+.content_menu{
+	width: 20%;
+	background-color: #C5E9F3;
+	float: left;
+}
+.content_body{
+	width: 80%;
+	background-color: white;
+	float: right; 
+}
+.floor{
+	clear: both;
+	height: 100px;
+	background-color: #8080FF;
 }

@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/display.html=UTF-8
+encoding//WebContent/ueditor=UTF-8
+encoding//WebContent/ueditor/jsp/config.json=UTF-8
+encoding//WebContent/ueditor/themes/iframe.css=UTF-8

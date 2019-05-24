@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>用户中心</title>
 </head>
 <body>
-
+	<%@ include file = "base.jsp" %>
 </body>
 </html>

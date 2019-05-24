@@ -2,10 +2,12 @@
 .form-container{
     width:300px;
     margin: 0 auto;
+    z-index:1999;
 }
 
 .page-title{
     margin: 0 auto;
     text-align: center;
+     z-index: 1999;
 } 
 
