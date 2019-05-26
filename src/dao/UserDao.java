@@ -111,4 +111,49 @@ public class UserDao {
               con.close(); 
           }
 	}
+	public void chpwd(String user_id,String pwd) throws SQLException {
+		Connection con;//声明连接对像
+    	PreparedStatement pstmt = null;//声明预处理陈述对象
+    	Conn c=new Conn();
+        con=c.getCinnection();//连接数据库
+        System.out.println("改密码");
+        String sql = "update user set user_pwd="+pwd+" where user_id ="+ "'"+user_id+"'";
+        try{
+        	pstmt = (PreparedStatement) con.prepareStatement(sql);
+        	pstmt.executeUpdate();//结果集对象 res
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally
+        {
+            if(pstmt!= null) 
+          	  pstmt.close(); 		
+            if(con!= null) 
+              con.close(); 
+          }
+	}
+	public void update(UserInfo user) throws SQLException {
+		Connection con;//声明连接对像
+    	PreparedStatement pstmt = null;//声明预处理陈述对象
+    	Conn c=new Conn();
+        con=c.getCinnection();//连接数据库
+        System.out.println("改密码");
+        String sql = "update user set user_name="+"'"+user.getUser_name()+
+        		"', user_describe="+"'"+user.getUser_describe()+
+        		"', user_sex="+"'"+user.getUser_sex()+
+        		"', user_img_url="+"'"+user.getUser_img_url()+"'"
+        		+ " where user_id ="+ "'"+user.getUser_id()+"'";
+        try{
+        	pstmt = (PreparedStatement) con.prepareStatement(sql);
+        	pstmt.executeUpdate();//结果集对象 res
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally
+        {
+            if(pstmt!= null) 
+          	  pstmt.close(); 		
+            if(con!= null) 
+              con.close(); 
+          }
+		
+	}
 }

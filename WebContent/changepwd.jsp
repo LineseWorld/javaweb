@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>用户主页</title>
+<title>修改密码</title>
 <style> *{
     box-sizing: border-box;
 }
@@ -15,7 +15,7 @@
     margin-left:20%;
 }
 #all{
-	 margin-top: 5%;
+	margin-top: 5%;
     margin-right:20%;
     margin-left:20%;
 }
@@ -66,7 +66,7 @@
     text-indent:50px;
     float: left;
     width: 50%;
-    background-color: #f1f1f1;
+    background-color: #ffff0f;
 }
  
 /* 列后清除浮动 */
@@ -76,24 +76,31 @@
     clear: both;
 }
 #rcorners1{
+    top: -65px;
     border-radius: 50px;
     background: #ddd;
-    padding: 20px; 
-	position: relative;
-    left: 330px;
-    height: 100%; 
+    padding: 15px;
+    position: relative;
+    left: -40px;
+    height: 100%;
+    float: right; 
 } 
 #rcorners2 {
     border-radius: 50px;
     background: #ddd;
-    padding: 20px; 
-	position: relative;
-    left: 440px;
+    padding: 14px;
+    position: relative;
+    left: -20px;
     top: -65px;
-    height: 100%; 
+    height: 100%;
+    float: right;
 }
-#rrow{
-	background-color: #f1f1f1;
+#shuru{
+	position: relative;
+    background-color: #f1f1f1;
+    height: 390px;
+
+    left: 0p;
 }
 /* 响应式布局 - 小于 600 px 时改为上下布局 */
 @media screen and (max-width: 600px) {
@@ -107,6 +114,15 @@
   background-color: #f1f1f1;
   padding: 10px;
 }
+#inputt{
+			    border: 2px solid #4caf50;
+			    width: 200px;;
+			    height: 35px;
+			    position: relative;
+			    top: 50px;
+    			left: 320px;
+			    border-radius: 5px;
+		}
 </style>
 </head>
 	<%@ include file="base.jsp" %>
@@ -129,38 +145,27 @@
 	</div>
 
 	<div class="topnav">
-	    <a href="index1.jsp">首页</a>
+		<a href="index1.jsp">首页</a>
 	    <a href="mysave.jsp">收藏</a>
-	    <a href="myanswer.jsp">回答</a>
+	    <a href="myanswer.jsp">回答</a>	
 	</div>
-	
-	<div id="rrow">
-	    <div class="column" >
-	        <h1>资料</h1><br>
-	        <h2>用户名:</h2> <p><%=user.getUser_name() %></p><br>
-	        <h2>账号:</h2> <p><%=user.getUser_id() %></p><br>
-	        <h2>性别:</h2> <p><%=user.getUser_sex() %></p><br>
-	    </div>
-	    <div class="column" >
-	        <h1>成就</h1><br>
-	        <h2>回答数:</h2> <p><%=user.getUser_answer_num() %></p><br>
-	        <h2>获赞数:</h2> <p><%=user.getUser_score() %></p><br>
-	        <h2>提问数:</h2> <p><%=user.getUse_question_num() %></p><br>
-	    </div>
+	<form action="checkchange.jsp" method="post">
+	<div id="shuru">
+	   <input id="inputt" type="password" name="old_pwd" placeholder=" 旧密码">
+	   <br>
+	   <br>
+	   <br>
+	   <input id="inputt" type="password" name="new_pwd" placeholder=" 新密码">
+	   <br>
+	   <br>
+	   <br>
+	   <input id="inputt" type="password" name="again_pwd" placeholder=" 确认密码">
 	</div>
-	<div class="footer">
-	
-	<form action="change_umessage.jsp"><span>
-	    <button id="rcorners1" >修改资料</button></span>
+	    <button id="rcorners2" type="submit" >确认修改</button>
 	</form>
-	
-	
-	<form action="changepwd.jsp">
-	<span>
-	    <button id="rcorners2">修改密码</button></span>
+	<form action="user.jsp"><span>
+	    <button id="rcorners1" >取消修改</button></span>
 	</form>
-	
-	</div>
 </div>
 </body>
 </html>

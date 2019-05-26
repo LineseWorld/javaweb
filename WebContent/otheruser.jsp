@@ -67,7 +67,7 @@
     text-indent:50px;
     float: left;
     width: 50%;
-    background-color: #ffff0f;
+    background-color: #f1f1f1;
 }
  
 /* 列后清除浮动 */
@@ -136,7 +136,7 @@
 	    <a href="myanswer.jsp">我的回答</a>
 	</div>
 	
-	<div class="row">
+	<div id="rrow">
 	    <div class="column" >
 	        <h1>资料</h1><br>
 	        <h2>用户名:</h2> <p><%=otheruser.getUser_name() %></p><br>

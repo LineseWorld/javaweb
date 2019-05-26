@@ -17,7 +17,6 @@
 		UserInfo user = dao.judge(id,pwd);
 		if(user!=null) {
 			request.getSession().setAttribute("user_id", user.getUser_id());//将用户id存入session中
-			request.getSession().setAttribute("user_pwd", user.getUser_pwd());//将用户pwd存入session中
 			response.sendRedirect("index1.jsp");
 		}
 		else{
