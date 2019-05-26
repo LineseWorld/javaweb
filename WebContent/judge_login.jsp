@@ -16,14 +16,12 @@
 		LoginDao dao = new LoginDao();
 		UserInfo user = dao.judge(id,pwd);
 		if(user!=null) {
-			/* request.getSession().setAttribute("sessionid",id);     //用Session保存用户名
-			request.getSession().setAttribute("sessionpwd",pwd);   //保存密码 */
-			request.getSession().setAttribute("user", user);//将整个用户信息存入session中
+			request.getSession().setAttribute("user_id", user.getUser_id());//将用户id存入session中
+			request.getSession().setAttribute("user_pwd", user.getUser_pwd());//将用户pwd存入session中
 			response.sendRedirect("index1.jsp");
 		}
 		else{
 			out.print("<script>alert('账号密码有误，请重新登陆!');window.location.href='login.jsp'</script>");//弹窗显示并转向login.jsp
-			
 		}
 	%>
 </body>

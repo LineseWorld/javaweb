@@ -5,9 +5,9 @@ import Info.UserInfo;
 
 public class LoginDao {
 	
-	public UserInfo judge(String id,String pwd) {
+	public UserInfo judge(String id,String pwd) throws SQLException {
 		Connection con;//声明连接对像
-    	PreparedStatement pstmt;//声明预处理陈述对象
+    	PreparedStatement pstmt = null;//声明预处理陈述对象
     	Conn c=new Conn();
         con=c.getCinnection();//连接数据库
         System.out.println(id);
@@ -20,15 +20,15 @@ public class LoginDao {
             {
             	UserInfo user = new UserInfo();
             	user.setUser_id(res.getString("user_id"));
-            	user.setUse_question_num(res.getString("user_question_num"));
-            	user.setUser_answer_num(res.getString("user_answer_num"));
+            	user.setUse_question_num(res.getInt("user_question_num"));
+            	user.setUser_answer_num(res.getInt("user_answer_num"));
             	user.setUser_name(res.getString("user_name"));
             	user.setUser_img_url(res.getString("user_img_url"));
             	user.setUser_pwd(res.getString("user_pwd"));
             	user.setUser_follows(res.getInt("user_follows"));
             	user.setUser_score(res.getInt("user_score"));
             	user.setUser_sex(res.getString("user_sex"));
-            	
+            	user.setUser_describe(res.getString("user_describe"));
             	if(user.getUser_pwd().equals(pwd)) {
             		return user;
             	}
@@ -41,7 +41,13 @@ public class LoginDao {
             }
         }catch (Exception e){
             e.printStackTrace();
-        }
+        } finally
+        {
+            if(pstmt!= null) 
+          	  pstmt.close(); 		
+            if(con!= null) 
+              con.close(); 
+          }
 		return null;
 	}
 }

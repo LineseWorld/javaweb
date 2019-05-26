@@ -202,11 +202,11 @@ function callBack(){
 		<div id="question">
 			<table id="tb1">
 					<tr>
-					  <th rowspan="2"><a href = "user.jsp"><img  src=<%=question_user_img_src %> width =50 height=50 class="img-circle"/></a></th>
+					  <th rowspan="2"><a href = "otheruser.jsp?ouser_id=<%=question_user_id %>"><img  src=<%=question_user_img_src %> width =50 height=50 class="img-circle"/></a></th>
 					  <td><b><%= question_user.getUser_name() %></b></td>
 					</tr>
 					<tr>
-					  <td>此人很懒，只会提问问题</td>
+					  <td><%= question_user.getUser_describe() %></td>
 					</tr>
 			</table>
 			<h4 id="title"><b><%= question.getQuestion_title()  %></b></h4>

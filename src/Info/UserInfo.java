@@ -2,14 +2,40 @@ package Info;
 
 public class UserInfo {
 	private String user_id;
+	
 	private String user_pwd;
 	private String user_name;
 	private String user_img_url;
 	private int user_score;
+	public UserInfo(String user_id, String user_pwd, String user_name, String user_img_url, int user_score,
+		String user_sex, int user_follows, int use_question_num, int user_answer_num, String user_describe) {
+		super();
+		this.user_id = user_id;
+		this.user_pwd = user_pwd;
+		this.user_name = user_name;
+		this.user_img_url = user_img_url;
+		this.user_score = user_score;
+		this.user_sex = user_sex;
+		this.user_follows = user_follows;
+		this.use_question_num = use_question_num;
+		this.user_answer_num = user_answer_num;
+		this.user_describe = user_describe;
+	}
+	public UserInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	private String user_sex;
 	private int user_follows;
-	private String use_question_num;
-	private String user_answer_num;
+	private int use_question_num;
+	private int user_answer_num;
+	private String user_describe;
+	public String getUser_describe() {
+		return user_describe;
+	}
+	public void setUser_describe(String user_describe) {
+		this.user_describe = user_describe;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -52,16 +78,16 @@ public class UserInfo {
 	public void setUser_follows(int user_follows) {
 		this.user_follows = user_follows;
 	}
-	public String getUse_question_num() {
+	public int getUse_question_num() {
 		return use_question_num;
 	}
-	public void setUse_question_num(String use_question_num) {
+	public void setUse_question_num(int use_question_num) {
 		this.use_question_num = use_question_num;
 	}
-	public String getUser_answer_num() {
+	public int getUser_answer_num() {
 		return user_answer_num;
 	}
-	public void setUser_answer_num(String user_answer_num) {
+	public void setUser_answer_num(int user_answer_num) {
 		this.user_answer_num = user_answer_num;
 	}
 }

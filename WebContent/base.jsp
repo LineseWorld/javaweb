@@ -1,3 +1,4 @@
+<%@page import="dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="dao.LoginDao" %>
@@ -61,7 +62,7 @@
 	#serach_button{
 		position: relative;
     	left: 810px;
-    	top: -114px;
+    	    top: -111px;
 	}
 	.dropdown {
 	  position: relative;
@@ -93,7 +94,11 @@
 	
 </style>
 <body style="background-image:url('img/bg.jpg');background-repeat:no-repeat;background-attachment:fixed;">
-	<% UserInfo user =  (UserInfo)session.getAttribute("user"); %>
+	<% 
+		UserDao uudao = new UserDao();
+		String user_id =  (String)session.getAttribute("user_id"); 
+		UserInfo user=uudao.SerachByUser_id(user_id);
+	%>
 	<div id="top1">
 		
 		<div id="brand"><a href ="index1.jsp"><img src="img/brand.png" width=100 height=50></a></div>

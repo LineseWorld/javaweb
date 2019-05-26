@@ -8,9 +8,9 @@ import java.util.*;
 import Info.QuestionInfo;
 
 public class QuestionDao {
-	public List<QuestionInfo> display(String id) {//显示问题列表
+	public List<QuestionInfo> display(String id) throws SQLException {//显示问题列表
 		Connection con;//声明连接对像
-    	PreparedStatement pstmt;//声明预处理陈述对象
+    	PreparedStatement pstmt = null;//声明预处理陈述对象
     	Conn c=new Conn();
         con=c.getCinnection();//连接数据库
         String sql = "";
@@ -38,12 +38,18 @@ public class QuestionDao {
         }catch (Exception e){
             e.printStackTrace();
             return null;
-        }
+        }finally
+        {
+            if(pstmt!= null) 
+          	  pstmt.close(); 		
+            if(con!= null) 
+              con.close(); 
+          }
 	}
 	
-	public List<QuestionInfo> search(String squestion_title) {//显示问题列表
+	public List<QuestionInfo> search(String squestion_title) throws SQLException {//显示问题列表
 		Connection con;//声明连接对像
-    	PreparedStatement pstmt;//声明预处理陈述对象
+    	PreparedStatement pstmt = null;//声明预处理陈述对象
     	Conn c=new Conn();
         con=c.getCinnection();//连接数据库
         String title="%";
@@ -77,13 +83,19 @@ public class QuestionDao {
         }catch (Exception e){
             e.printStackTrace();
             return null;
-        }
+        }finally
+        {
+            if(pstmt!= null) 
+          	  pstmt.close(); 		
+            if(con!= null) 
+              con.close(); 
+          }
 	}
 	
 	
-	public QuestionInfo serach_question(int id) {//根据问题id查询问题
+	public QuestionInfo serach_question(int id) throws SQLException {//根据问题id查询问题
 		Connection con;//声明连接对像
-    	PreparedStatement pstmt;//声明预处理陈述对象
+    	PreparedStatement pstmt = null;//声明预处理陈述对象
     	Conn c=new Conn();
         con=c.getCinnection();//连接数据库
         String sql = "";
@@ -110,11 +122,17 @@ public class QuestionDao {
         }catch (Exception e){
             e.printStackTrace();
             return null;
-        }
+        }finally
+        {
+            if(pstmt!= null) 
+          	  pstmt.close(); 		
+            if(con!= null) 
+              con.close(); 
+          }
 	}
-	public void Offer(QuestionInfo question,String user_id) {
+	public void Offer(QuestionInfo question,String user_id) throws SQLException {
 		Connection con;//声明连接对像
-    	PreparedStatement pstmt;//声明预处理陈述对象
+    	PreparedStatement pstmt = null;//声明预处理陈述对象
     	Conn c=new Conn();
         con=c.getCinnection();//连接数据库
         String sql = "";
@@ -129,11 +147,17 @@ public class QuestionDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally
+        {
+            if(pstmt!= null) 
+          	  pstmt.close(); 		
+            if(con!= null) 
+              con.close(); 
+          }
 	}
-	public void Add_answer(int question_id) {
+	public void Add_answer(int question_id) throws SQLException {
 		Connection con;//声明连接对像
-    	PreparedStatement pstmt;//声明预处理陈述对象
+    	PreparedStatement pstmt = null;//声明预处理陈述对象
     	Conn c=new Conn();
         con=c.getCinnection();//连接数据库
         String sql = "";
@@ -149,5 +173,12 @@ public class QuestionDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	finally
+        {
+            if(pstmt!= null) 
+          	  pstmt.close(); 		
+            if(con!= null) 
+              con.close(); 
+          }
 	}
 }

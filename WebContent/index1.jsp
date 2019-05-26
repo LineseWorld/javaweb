@@ -79,20 +79,26 @@
 			QuestionDao qdao=new QuestionDao();
 			UserDao udao=new UserDao();
 			List<QuestionInfo> questions = qdao.display("#");
+			if(questions==null){
+				%>
+					<h1>没人提问问题</h1>
+				<%
+			}else{
 			for(QuestionInfo question:questions){
-				String user_id=question.getUser_id();
+				String question_user_id=question.getUser_id();
 				int id=question.getQuestion_id();
-				UserInfo question_user=udao.SerachByUser_id(user_id);
+				UserInfo question_user=udao.SerachByUser_id(question_user_id);
+				System.out.println("aaaa");
 				String question_user_img_src="img/"+question_user.getUser_img_url();	
 	%>
 		<div id="question">
 			<table id="tb1">
 					<tr>
-					  <th rowspan="2"><a href = "user.jsp"><img  src=<%=question_user_img_src %> width =50 height=50 class="img-circle"/></a></th>
+					  <th rowspan="2"><a href = "otheruser.jsp?ouser_id=<%=question_user_id %>"><img  src=<%=question_user_img_src %> width =50 height=50 class="img-circle"/></a></th>
 					  <td><b><%= question_user.getUser_name() %></b></td>
 					</tr>
 					<tr>
-					  <td>此人很懒，只会提问问题</td>
+					  <td><%= question_user.getUser_describe() %></td>
 					</tr>
 				</table>
 			<h4 id="title"><b><%= question.getQuestion_title()  %></b></h4>
@@ -106,6 +112,7 @@
 			</p>
 		</div>
 		<% 
+			}
 			}
 		%>
 		</div>

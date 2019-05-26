@@ -86,9 +86,9 @@
 		}else{
 			UserDao udao=new UserDao();
 			for(QuestionInfo question:questions){
-				String user_id=question.getUser_id();
+				String question_user_id=question.getUser_id();
 				int id=question.getQuestion_id();
-				UserInfo question_user=udao.SerachByUser_id(user_id);
+				UserInfo question_user=udao.SerachByUser_id(question_user_id);
 				String question_user_img_src="img/"+question_user.getUser_img_url();
 		%>
 		<div id="question">

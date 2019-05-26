@@ -29,16 +29,15 @@ public class MobileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		System.out.println(" ’≤ÿ£°£°");
+		/*request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-		String mobile=request.getParameter("mobile");
-	
+		String mobile=request.getParameter("answer_id");
+		String user_id=request.getParameter("user_id");
 		int answer_id= Integer.parseInt(mobile);
-		AnswerInfo answer=new AnswerInfo();
-		AnswerDao adao=new AnswerDao();
-
-		PrintWriter out= response.getWriter();
+		SaveDao sdao=new SaveDao();
+		sdao.addsave(answer_id, user_id);*/
 	
 	}
 

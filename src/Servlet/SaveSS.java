@@ -1,24 +1,27 @@
 package Servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Info.*;
-import dao.*;
+
+import dao.SaveDao;
+
 /**
- * Servlet implementation class Offerquestion
+ * Servlet implementation class SaveSS
  */
-@WebServlet("/Offerquestion")
-public class Offerquestion extends HttpServlet {
+@WebServlet("/SaveSS")
+public class SaveSS extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Offerquestion() {
+    public SaveSS() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,17 +30,20 @@ public class Offerquestion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(" ’≤ÿ£°£°");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-		String title=request.getParameter("title");
-		String content=request.getParameter("content");
-		String part_content=request.getParameter("part_content");
-		UserInfo user=(UserInfo) request.getSession().getAttribute("user");
-		QuestionInfo question=new QuestionInfo(0,user.getUser_id(),title,content,0,part_content);
-		QuestionDao qdao=new QuestionDao();
-		qdao.Offer(question, user.getUser_id());
-		response.sendRedirect("index1.jsp");
+		String mobile=request.getParameter("answer_id");
+		String user_id=request.getParameter("user_id");
+		int answer_id= Integer.parseInt(mobile);
+		SaveDao sdao=new SaveDao();
+		try {
+			sdao.addsave(answer_id, user_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

@@ -104,6 +104,11 @@
 		color:white;
 		text-decoration:none;
 	}
+	#myimage{
+		 position: relative;
+		 left: 0;
+		 top: 0;
+	}
 	
 	
 	
@@ -114,31 +119,30 @@
 function sendGood(answer_id,user_id){
 	
 	xmlHttpRequest = new XMLHttpRequest();
-	
 	//设置xmlHttpRequest对象回调函数
 	xmlHttpRequest.onreadystatechange=callBack;
-	
 	xmlHttpRequest.open("post","GoodServlet",true);
 	//设置post方式的头信息
 	xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	
 	xmlHttpRequest.send("answer_id="+answer_id+"&user_id="+user_id);//key=value 
 }
-
 //定义回调函数(接收服务端的返回值)
 function callBack(){
-	//alert("2222");
+	
 	//alert(xmlHttpRequest.readyState);
 	if(xmlHttpRequest.readyState==4 && xmlHttpRequest.status ==200){
 		//接收服务端返回数据
 		var data=xmlHttpRequest.responseText;
-		if(data!="#"&&data!="@"){
-			document.getElementById("good").innerHTML=data;
+		if(data==null){}
+		else{
+		var result = data.split("|");
+		if(result[1]!="#"&&result[1]!="@"){
+			document.getElementById(result[0]).innerHTML=result[1];
 		}
 		else{
 			alert("您已经点赞过了！！");
 		}
-		
+		}
 	}
 }
 </script>
@@ -148,9 +152,10 @@ function callBack(){
 		<p id="menu_bution" class="active"><a href="index1.jsp" class="three">问题大厅</a></p>
 		<p id="menu_bution" class="p2"><a href="myanswer.jsp" class="three">我的回答</a></p>
 		
-		<p id="menu_bution" class="p2"><a href="index1.jsp" class="three">提问问题</a></p>
+		<p id="menu_bution" class="p2"><a href="offeranswer.jsp" class="three">提问问题</a></p>
+		<p id="menu_bution" class="p2"><a href="mysave.jsp" class="three">我的收藏</a></p>	
 		<p id="menu_bution" class="p2"><a href="aboutus.jsp" class="three">关于我们</a></p>
-		<p id="menu_bution" class="p2"><a href="index1.jsp" class="three">提问问题</a></p>	
+		
 	</div>
 	<div id="content">
 	<%
@@ -166,16 +171,16 @@ function callBack(){
 					String question_user_id=question.getUser_id();
 					UserInfo question_user=udao.SerachByUser_id(question_user_id);//回答者
 					String question_user_img_src="img/"+question_user.getUser_img_url();
-					System.out.println("bbb");
+					
 	%>
 		<div id="question">
 			<table id="tb1">
 					<tr>
-					  <th rowspan="2"><a href = "user.jsp"><img  src=<%=question_user_img_src %> width =50 height=50 class="img-circle"/></a></th>
+					  <th rowspan="2"><a href = "otheruser.jsp?ouser_id=<%=question_user_id %>"><img  src=<%=question_user_img_src %> width =50 height=50 class="img-circle"/></a></th>
 					  <td><b><%= question_user.getUser_name() %></b></td>
 					</tr>
 					<tr>
-					  <td>此人很懒，只会提问问题</td>
+					  <td><%= question_user.getUser_describe() %></td>
 					</tr>
 			</table>
 			<h4 id="title"><b><%= question.getQuestion_title()  %></b></h4>
@@ -198,27 +203,77 @@ function callBack(){
 					for (AnswerInfo answer : answers) {
 						String answer_user_id=answer.getUser_id();
 						UserInfo answer_user=udao.SerachByUser_id(answer_user_id);
-						System.out.println("answer_user_id==="+answer_user_id);
+						
 						String answer_user_img_src="img/"+answer_user.getUser_img_url();
 	%>
 		<div id="question">
 			<table id="tb1">
 					<tr>
-					  <th rowspan="2"><a href = "user.jsp"><img  src=<%=answer_user_img_src %> width =50 height=50 class="img-circle"/></a></th>
+					  <th rowspan="2"><a href = "otheruser.jsp?ouser_id=<%=answer_user_id %>"><img  src=<%=answer_user_img_src %> width =50 height=50 class="img-circle"/></a></th>
 					  <td><b><%= answer_user.getUser_name() %></b></td>
 					</tr>
 					<tr>
-					  <td>此人很勤奋，回答了很多问题</td>
+					  <td><%= answer_user.getUser_describe() %></td>
 					</tr>
 			</table>
 			<div id="content2"><%= answer.getAnswer_content() %></div>
-			<% int ansid=answer.getAnswer_id();%>
-			<% String user_id = user.getUser_id(); // JSP片段中定义变量%>
+			<% 
+				SaveDao sdao=new SaveDao();
+				String savefg="";
+				if(sdao.judge(answer.getAnswer_id(), user.getUser_id())==null){
+					savefg="save.jpg";
+				}else{
+					savefg="saved.jpg";
+				}
+				String save_src="img/"+savefg;
+			%>
 			<p style="padding: 10px;">
 				<span id="goodSpan" onclick="sendGood(<%=answer.getAnswer_id() %>,'<%=user.getUser_id() %>')"><img src="img/good.jpg" style="width: 25px; height: 25px;" /></span>
-				
-				[<span id="good"><%=answer.getAnswer_score() %></span>]
+				[<span id='<%=answer.getAnswer_id() %>'><%=answer.getAnswer_score() %></span>]
+				<img id='s<%=answer.getAnswer_id() %>' onclick="sendSave(<%=answer.getAnswer_id() %>,'<%=user.getUser_id() %>')" src=<%=save_src %> width="50" height="50">
 			</p>
+			<script type="text/javascript">
+				var sta="<%=savefg %>";
+				var flag = false;
+				if(sta=="save.jpg")
+				{
+					flag = false;
+				}
+				else{
+					flag = true;
+				}
+				function sendSave(answer_id,user_id)
+				{
+					
+					element=document.getElementById("s"+answer_id)
+					if (flag)
+					{
+						
+						element.src="img/save.jpg";
+						flag = false;
+						xmlHttpRequest2 = new XMLHttpRequest();
+						//设置xmlHttpRequest对象回调函数
+						xmlHttpRequest2.open("post","SavedSS",true);
+						//设置post方式的头信息
+						xmlHttpRequest2.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+						xmlHttpRequest2.send("answer_id="+answer_id+"&user_id="+user_id);//key=value 
+					}
+					else
+					{
+						
+						element.src="img/saved.jpg";
+						flag = true;
+						xmlHttpRequest3 = new XMLHttpRequest();
+						//设置xmlHttpRequest对象回调函数
+						xmlHttpRequest3.open("post","SaveSS",true);
+						//设置post方式的头信息
+						xmlHttpRequest3.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+						xmlHttpRequest3.send("answer_id="+answer_id+"&user_id="+user_id);//key=value 
+					}
+					
+				}
+
+			</script>
 		</div>
 		<%
 					}
