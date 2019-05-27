@@ -120,7 +120,7 @@ function callBack(){
 			List<SaveInfo> saves = sdao.SearcByUser_id(user.getUser_id());
 			if(saves==null){
 				%>
-				<h1>异常</h1>
+				<h1>还没有收藏</h1>
 				<%
 			}else{
 			

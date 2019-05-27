@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -48,8 +49,17 @@ public class UploadServlet extends HttpServlet {
 		String user_name = null;
 		String user_sex = null;
 		String user_describe = null;
-		String user_img_url=null;
-		String fileName=null;
+		UserDao udao =new UserDao();
+		UserInfo buser = null;
+		try {
+			buser = udao.SerachByUser_id(user_id);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String user_img_url=buser.getUser_img_url();
+		
+		String fileName=buser.getUser_img_url();
 		request.setCharacterEncoding("utf-8");//±àÂëÍ³Ò»
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -104,7 +114,7 @@ public class UploadServlet extends HttpServlet {
 							
 						}
 					}
-					UserDao udao=new UserDao();
+					
 					UserInfo user=new UserInfo();
 					user.setUser_id(user_id);
 					user.setUser_name(user_name);
